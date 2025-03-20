@@ -1,1 +1,5 @@
 
+<div>
+  <input type="text" placeholder="Enter a new task..." [(ngModel)]="newTaskTitle" >
+  <button (click)="addTaskHandler(newTaskTitle())">Add Task</button>
+</div>

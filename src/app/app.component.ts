@@ -1,14 +1,15 @@
 // app.component.ts
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { TaskListComponent } from "./task-list/task-list.component";
 import { TaskFormComponent } from "./task-form/task-form.component";
+import { DashboardComponent } from "./dashboard/dashboard.component";
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
-  imports: [TaskListComponent, TaskFormComponent]
+  imports: [ DashboardComponent]
 })
 export class AppComponent {
-  title = 'Task Manager App';
+  title = signal('Task Manager App');
 }

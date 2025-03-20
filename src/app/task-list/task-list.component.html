@@ -1,15 +1,18 @@
 <!-- task-list.component.html -->
-<div>
+
+<app-task>
+  <div>
     <button (click)="changeFilter('All')">All</button>
     <button (click)="changeFilter('Completed')">Completed</button>
     <button (click)="changeFilter('Pending')">Pending</button>
 
     <ul>
-        @for (task of tasks; track $index) {
+        @for (task of tasks(); track $index) {
             <li>
               {{ task.title }} - {{ task.completed ? 'Completed' : 'Pending' }}
             </li>
         }
     </ul>
   </div>
+</app-task>
   

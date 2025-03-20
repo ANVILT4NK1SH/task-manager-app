@@ -1,6 +1,7 @@
 // task-list.component.ts
-import { Component, signal } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { TaskComponent } from "../task/task.component";
+import { TaskService } from '../shared/services/task.service';
 
 @Component({
   selector: 'app-task-list',
@@ -9,26 +10,23 @@ import { TaskComponent } from "../task/task.component";
   imports: [TaskComponent]
 })
 export class TaskListComponent {
-  tasks = [
-    { title: 'Task 1', completed: false },
-    { title: 'Task 2', completed: true },
-    { title: 'Task 3', completed: false },
-  ];
+  tasksService = inject(TaskService)
+  tasks = this.tasksService.tasks
 
   
-  filter = 'All';
+  filterStatus = 'All';
 
   get filteredTasks() {
-    if (this.filter === 'Completed') {
-      return this.tasks.filter(task => task.completed);
+    if (this.filterStatus === 'Completed') {
+      return this.tasks().filter(task => task.completed);
     }
-    if (this.filter === 'Pending') {
-      return this.tasks.filter(task => !task.completed);
+    if (this.filterStatus === 'Pending') {
+      return this.tasks().filter(task => !task.completed);
     }
     return this.tasks;
   }
 
   changeFilter(status: string) {
-    status = this.filter;
+    status = this.filterStatus;
   }
 }
