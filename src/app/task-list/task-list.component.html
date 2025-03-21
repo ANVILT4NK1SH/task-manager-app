@@ -1,18 +1,33 @@
 <!-- task-list.component.html -->
 
+
+
 <app-task>
+
   <div>
     <button (click)="changeFilter('All')">All</button>
     <button (click)="changeFilter('Completed')">Completed</button>
     <button (click)="changeFilter('Pending')">Pending</button>
-
+    @if (isEdit) {
+      <app-edit-form [currentTitle]="currentTitle()"/>
+    }
     <ul>
-        @for (task of tasks(); track $index) {
-            <li>
-              {{ task.title }} - {{ task.completed ? 'Completed' : 'Pending' }}
-            </li>
-        }
+      @for (task of tasks(); track $index) {
+      
+        @if (task.completed) {
+        <li class="completed">
+        {{ task.title }} - {{ task.completed ? "Completed" : "Pending" }} -
+        {{ task.priority }}
+        <input type="checkbox" [value]="true" (change)="isCheckedHandler(task.completed, task)">
+        <button (click)="editTaskHandler(task.title)">Edit Task</button>
+      </li>
+      } @else{<li>
+        {{ task.title }} - {{ task.completed ? "Completed" : "Pending" }} -
+        {{ task.priority }}
+        <input type="checkbox" [value]="true" (change)="isCheckedHandler(task.completed, task)">
+        <button (click)="editTaskHandler(task.title)">Edit Task</button>
+      </li>}
+      }
     </ul>
   </div>
 </app-task>
-  

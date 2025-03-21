@@ -1,4 +1,5 @@
 export interface Task{
    title: string,
-  completed: boolean
+  completed: boolean,
+  priority: 'urgent' | 'normal' | 'not-urgent',
  }
